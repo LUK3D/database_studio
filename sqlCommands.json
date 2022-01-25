@@ -3,7 +3,7 @@
         "lisdb":"SHOW DATABASES;",
         "listtables":"SHOW TABLES;",
         "listcolumns":"SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '${table}' ORDER BY ORDINAL_POSITION",
-        "liststoredprocedures":"Select * from sysobjects where type = 'P' and category = 0",
+        "liststoredprocedures":"SHOW PROCEDURE STATUS WHERE Db  = '${database}'; ",
         "storedproceduresscripts":"USE MASI_TESTES SELECT  OBJECT_DEFINITION (OBJECT_ID(N'${storedProcedure}') ) As SCRIPT;",
         "functions":"SELECT name, definition, type_desc  FROM sys.sql_modules m  INNER JOIN sys.objects o  ON m.object_id=o.object_id WHERE type_desc like '%function%'",
         "relations":"SELECT src.name AS 'TABLE', srcCol.name AS 'COLUMN' , dst.name AS 'PK_TABLE', dstCol.name AS 'PK_COLUMN' FROM sys.foreign_key_columns fk  INNER JOIN sys.columns srcCol ON fk.parent_column_id = srcCol.[column_id]   AND fk.parent_object_id = srcCol.[object_id] INNER JOIN sys.tables src ON src.[object_id] = fk.parent_object_id INNER JOIN sys.tables  dst  ON dst.[object_id] = fk.[referenced_object_id]  INNER JOIN sys.columns dstCol ON fk.referenced_column_id = dstCol.[column_id]  AND fk.[referenced_object_id] = dstCol.[object_id]"
@@ -11,7 +11,7 @@
    
     },
     "sqlServer":{
-        "lisdb":"SELECT name FROM sys.databases WHERE name NOT IN ('master', 'model', 'tempdb', 'msdb', 'Resource')",
+        "lisdb":"SELECT name FROM master.dbo.sysdatabases WHERE dbid > 4",
         "listtables":"SELECT TABLE_NAME  FROM INFORMATION_SCHEMA.TABLES  WHERE TABLE_TYPE = 'BASE TABLE'  AND TABLE_CATALOG='${database}'",
         "listcolumns":"SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '${table}' ORDER BY ORDINAL_POSITION",
         "liststoredprocedures":"Select * from sysobjects where type = 'P' and category = 0",

@@ -16,7 +16,7 @@ app.post('/databases', (req, res) => {
 })
 
 app.get('/tables', (req, res) => {
-    db.listTables({database:req.body.database,server:req.body.server,user:req.body.use,password:req.body.password,callback:(resp)=>{
+    db.listTables({...req.body,callback:(resp)=>{
         res.send(resp)
     }})
 })

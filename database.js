@@ -40,8 +40,8 @@ function listStoredProcedures({server, user, password,database, callback, engine
     executeQuery({server:server,user:user,password:password, engine:engine,  database:database, 
         
         query:((engine == "mysql")?
-        utils.replace(sqlCommands.mysql.liststoredprocedures,"${table}",database) 
-        :utils.replace(sqlCommands.sqlServer.liststoredprocedures,"${table}",database)),
+        utils.replace(sqlCommands.mysql.liststoredprocedures,"${database}",database) 
+        :utils.replace(sqlCommands.sqlServer.liststoredprocedures,"${database}",database)),
     
     onSuccess:(val)=>{
         callback && callback((val?(val.recordset)?val.recordset:val:null));
