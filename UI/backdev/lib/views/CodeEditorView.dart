@@ -1,8 +1,8 @@
 import 'package:code_text_field/code_text_field.dart';
 import 'package:flutter/material.dart';
 // Import the language & theme
-import 'package:highlight/languages/dart.dart';
-import 'package:flutter_highlight/themes/monokai-sublime.dart';
+import 'package:highlight/languages/sql.dart';
+import 'package:flutter_highlight/themes/arduino-light.dart' as onedark;
 
 class CodeEditorView extends StatefulWidget {
   @override
@@ -15,12 +15,25 @@ class _CodeEditorState extends State<CodeEditorView> {
   @override
   void initState() {
     super.initState();
-    final source = "void main() {\n    print(\"Hello, world!\");\n}";
+    final source = """
+    SELECT 
+    BALCAO.DESCRICAO,
+             BALCAO.ID_BALCAO,
+             BALCAO.NM_BALCAO,
+ (SELECT COUNT(FUNCIONARIO.ID_FUNCIONARIO)
+              FROM   FUNCIONARIO FUNCIONARIO
+              WHERE  FUNCIONARIO.COD_BALCAO = BALCAO.ID_BALCAO
+                     AND FUNCIONARIO.FL_EXCLU = 0) AS TOTAL_FUNCIONARIOS
+      FROM   BALCAO BALCAO
+      WHERE  BALCAO.FL_EXCLU = '' AND
+             [DBO].BALCAO LIKE '%'+ @NM_BALCAO+'%'
+             OR BALCAO LIKE '%'+ @DESCRICAO+'%'
+    """;
     // Instantiate the CodeController
     _codeController = CodeController(
       text: source,
-      language: dart,
-      theme: monokaiSublimeTheme,
+      language: sql,
+      theme: onedark.arduinoLightTheme,
     );
   }
 
@@ -34,7 +47,7 @@ class _CodeEditorState extends State<CodeEditorView> {
   Widget build(BuildContext context) {
     return CodeField(
       controller: _codeController!,
-      textStyle: TextStyle(fontFamily: 'SourceCode'),
+      textStyle: TextStyle(fontFamily: 'SourceCode', fontSize: 13),
     );
   }
 }

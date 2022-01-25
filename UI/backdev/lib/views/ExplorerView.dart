@@ -12,7 +12,10 @@ class ExplorerView extends StatelessWidget with TabPageMixin {
   final String title = 'Explorer';
 
   @override
-  final IconData iconData = Icons.account_tree_outlined;
+  final Widget icon = HeroIcon(
+    HeroIcons.server,
+    size: 15,
+  );
 
   @override
   Widget build(BuildContext context) {
