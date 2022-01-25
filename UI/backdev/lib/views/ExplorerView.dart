@@ -4,7 +4,7 @@ import 'package:backdev/controllers/ExplorerController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
-import 'package:tabpanel/tabpanel.dart';
+import 'package:backdev/tab_panel/tabpanel.dart';
 import 'package:tree_view/tree_view.dart';
 
 class ExplorerView extends StatelessWidget with TabPageMixin {

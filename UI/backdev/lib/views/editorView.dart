@@ -1,7 +1,7 @@
 import 'package:backdev/controllers/EditorController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tabpanel/tabpanel.dart';
+import 'package:backdev/tab_panel/tabpanel.dart';
 
 class EditorView extends StatelessWidget {
   const EditorView({Key? key}) : super(key: key);

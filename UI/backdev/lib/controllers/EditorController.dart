@@ -3,7 +3,7 @@ import 'package:backdev/views/ExplorerView.dart';
 import 'package:backdev/views/ToolsView.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tabpanel/tabpanel.dart';
+import 'package:backdev/tab_panel/tabpanel.dart';
 
 class EditorController extends GetxController {
   var darkMode = false.obs;

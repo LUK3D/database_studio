@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tabpanel/tabpanel.dart';
+import 'package:backdev/tab_panel/tabpanel.dart';
 
 class ToolsView extends StatelessWidget with TabPageMixin {
   @override
