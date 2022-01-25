@@ -258,6 +258,7 @@ class EmptyPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
+        height: 30,
         child: FittedBox(
           fit: BoxFit.contain,
           child: InkWell(

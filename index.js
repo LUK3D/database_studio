@@ -11,7 +11,9 @@ app.get('/', (req, res) => {
 })
 app.post('/databases', (req, res) => {
     db.listDB({...req.body,callback:(resp)=>{
-        res.send(resp)
+        res.send(resp.map(x=>{
+            return {name:x.Database}
+        }));
     }})
 })
 

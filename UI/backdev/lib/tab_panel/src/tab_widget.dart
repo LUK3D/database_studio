@@ -22,8 +22,11 @@ class TabWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final lastPage = tab.pages.isNotEmpty ? tab.pages.last : null;
 
-    final defaultIcon =
-        Icon(Icons.tab, color: Theme.of(context).colorScheme.onSurface);
+    final defaultIcon = Icon(
+      Icons.tab,
+      color: Theme.of(context).colorScheme.onSurface,
+      size: 20,
+    );
     Widget icon;
     String title;
     if (lastPage is TabPageMixin) {
@@ -51,7 +54,7 @@ class TabWidget extends StatelessWidget {
             ),
           )),
       child: ConstrainedBox(
-        constraints: BoxConstraints(minHeight: 40),
+        constraints: BoxConstraints(minHeight: 10),
         child: Observer(builder: (context) {
           return Row(
             children: [
@@ -83,7 +86,11 @@ class TabWidget extends StatelessWidget {
               SizedBox(width: 8),
               if (!tab.locked)
                 IconButton(
-                  icon: Icon(Icons.close),
+                  icon: Icon(
+                    Icons.close,
+                    size: 15,
+                  ),
+                  splashRadius: 15,
                   onPressed:
                       !tab.locked ? () => tab.panel.closeTab(tab.id) : null,
                   color: Theme.of(context).colorScheme.onSurface,

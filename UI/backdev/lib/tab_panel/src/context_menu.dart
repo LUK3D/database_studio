@@ -52,6 +52,7 @@ class _ContextMenuState extends State<ContextMenu> {
               icon: widget.icon!,
               onPressed: widget.showOnTap ? _showMenu : () {},
               color: Theme.of(context).colorScheme.onPrimary,
+              splashRadius: 20,
             )
           : widget.child,
     );
