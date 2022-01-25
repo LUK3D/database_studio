@@ -20,32 +20,32 @@ app.post('/databases', (req, res) => {
 })
 
 app.get('/tables', (req, res) => {
-    db.listTables({server:"LLDESWKSHP0421",user:"sa",password:"abc@123",database:"MASI_TESTES",callback:(resp)=>{
+    db.listTables({...req.body,callback:(resp)=>{
         res.send(resp)
     }})
 })
 app.get('/columns', (req, res) => {
-    db.listColumns({server:"LLDESWKSHP0421",user:"sa",password:"abc@123",database:"MASI_TESTES",table:"APPS",callback:(resp)=>{
+    db.listColumns({...req.body,callback:(resp)=>{
         res.send(resp)
     }})
 })
 app.get('/sprocedures', (req, res) => {
-    db.listStoredProcedures({server:"LLDESWKSHP0421",user:"sa",password:"abc@123",database:"MASI_TESTES",callback:(resp)=>{
+    db.listStoredProcedures({...req.body,callback:(resp)=>{
         res.send(resp)
     }})
 })
 app.get('/spScript', (req, res) => {
-    db.storedProcedureScript({server:"LLDESWKSHP0421",user:"sa",password:"abc@123",database:"MASI_TESTES",storedProcedure:"PROC_PERFIL_GRUPO_ALTERAR",callback:(resp)=>{
+    db.storedProcedureScript({...req.body,callback:(resp)=>{
         res.send(resp)
     }})
 })
 app.get('/functions', (req, res) => {
-    db.functions({server:"LLDESWKSHP0421",user:"sa",password:"abc@123",database:"MASI_TESTES",callback:(resp)=>{
+    db.functions({...req.body,callback:(resp)=>{
         res.send(resp)
     }})
 })
 app.get('/relations', (req, res) => {
-    db.relations({server:"LLDESWKSHP0421",user:"sa",password:"abc@123",database:"MASI_TESTES",callback:(resp)=>{
+    db.relations({...req.body,callback:(resp)=>{
         res.send(resp)
     }})
 })

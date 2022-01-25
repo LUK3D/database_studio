@@ -1,5 +1,6 @@
 import 'package:backdev/controllers/LoginController.dart';
 import 'package:backdev/views/components/lukInput.dart';
+import 'package:backdev/views/editorView.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
@@ -70,57 +71,65 @@ class LoginView extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[100],
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Obx(
-                      () => TextButton.icon(
-                          style: ButtonStyle(alignment: Alignment.centerLeft),
-                          onPressed: () {
-                            SelectDialog.showModal<String>(
-                              context,
-                              constraints: BoxConstraints.expand(
-                                  width: 400, height: 400),
-                              label: "Seleciona uma Base de dados",
-                              searchHint: "Pesquisar...",
-                              selectedValue: _controller.selectedDB.value,
-                              items: _controller.databases.value,
-                              itemBuilder: (ctx, item, active) {
-                                return Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 10),
-                                  child: Row(
-                                    children: [
-                                      CircleAvatar(
-                                          child: HeroIcon(HeroIcons.database)),
-                                      SizedBox(
-                                        width: 10,
+                  Obx(
+                    () => Visibility(
+                      visible: (_controller.databases.value.isNotEmpty),
+                      child: Container(
+                        width: double.infinity,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: Colors.grey[100],
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: Obx(
+                          () => TextButton.icon(
+                              style:
+                                  ButtonStyle(alignment: Alignment.centerLeft),
+                              onPressed: () {
+                                SelectDialog.showModal<String>(
+                                  context,
+                                  constraints: BoxConstraints.expand(
+                                      width: 400, height: 400),
+                                  label: "Seleciona uma Base de dados",
+                                  searchHint: "Pesquisar...",
+                                  selectedValue: _controller.selectedDB.value,
+                                  items: _controller.databases.value,
+                                  itemBuilder: (ctx, item, active) {
+                                    return Container(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 10, horizontal: 10),
+                                      child: Row(
+                                        children: [
+                                          CircleAvatar(
+                                              child:
+                                                  HeroIcon(HeroIcons.database)),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(item)
+                                        ],
                                       ),
-                                      Text(item)
-                                    ],
-                                  ),
+                                    );
+                                  },
+                                  onChange: (String selected) {
+                                    _controller.selectedDB.value = selected;
+                                  },
                                 );
                               },
-                              onChange: (String selected) {
-                                _controller.selectedDB.value = selected;
-                              },
-                            );
-                          },
-                          icon: HeroIcon(
-                            HeroIcons.database,
-                            color: Colors.grey[600],
-                          ),
-                          label: Text(
-                            (_controller.selectedDB.value.isNotEmpty)
-                                ? _controller.selectedDB.value
-                                : "Selecionar Base de dados",
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                            ),
-                          )),
+                              icon: HeroIcon(
+                                HeroIcons.database,
+                                color: Colors.grey[600],
+                              ),
+                              label: Text(
+                                (_controller.selectedDB.value.isNotEmpty)
+                                    ? _controller.selectedDB.value
+                                    : "Selecionar Base de dados",
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                ),
+                              )),
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -144,7 +153,7 @@ class LoginView extends StatelessWidget {
                               color: Colors.white,
                             ),
                             label: Text(
-                              "Testar Conexão",
+                              "Conectar",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -153,27 +162,32 @@ class LoginView extends StatelessWidget {
                       SizedBox(
                         width: 10,
                       ),
-                      Expanded(
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          child: TextButton.icon(
-                              onPressed: () {
-                                print("Vamos ver essas cenas ");
-                              },
-                              icon: HeroIcon(
-                                HeroIcons.login,
-                                color: Colors.white,
-                              ),
-                              label: Text(
-                                "Iniciar",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              )),
+                      Obx(
+                        () => Visibility(
+                          visible: _controller.selectedDB.value.isNotEmpty,
+                          child: Expanded(
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColor,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: TextButton.icon(
+                                  onPressed: () {
+                                    Get.to(EditorView());
+                                  },
+                                  icon: HeroIcon(
+                                    HeroIcons.login,
+                                    color: Colors.white,
+                                  ),
+                                  label: Text(
+                                    "Iniciar",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  )),
+                            ),
+                          ),
                         ),
                       ),
                     ],
