@@ -4,10 +4,6 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const port = 3011
-
-
-
-
 const db  = require("./database.js");
 
 app.get('/', (req, res) => {
@@ -20,7 +16,7 @@ app.post('/databases', (req, res) => {
 })
 
 app.get('/tables', (req, res) => {
-    db.listTables({...req.body,callback:(resp)=>{
+    db.listTables({database:req.body.database,server:req.body.server,user:req.body.use,password:req.body.password,callback:(resp)=>{
         res.send(resp)
     }})
 })
