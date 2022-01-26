@@ -5,15 +5,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const port = 3011
 const db  = require("./database.js");
+const h = require("./helpers");
 
 app.get('/', (req, res) => {
         res.send("Welcome!")
 })
 app.post('/databases', (req, res) => {
     db.listDB({...req.body,callback:(resp)=>{
-        res.send(resp.map(x=>{
-            return {name:x.Database}
-        }));
+        res.send(h.dbFromObject(resp));
     }})
 })
 
