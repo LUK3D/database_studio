@@ -45,9 +45,14 @@ class _CodeEditorState extends State<CodeEditorView> {
 
   @override
   Widget build(BuildContext context) {
-    return CodeField(
-      controller: _codeController!,
-      textStyle: TextStyle(fontFamily: 'SourceCode', fontSize: 13),
+    return Container(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: CodeField(
+          controller: _codeController!,
+          textStyle: TextStyle(fontFamily: 'SourceCode', fontSize: 13),
+        ),
+      ),
     );
   }
 }
