@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
 })
 app.post('/databases', (req, res) => {
     db.listDB({...req.body,callback:(resp)=>{
+        console.log(resp)
         res.send(h.dbFromObject(resp));
     }})
 })

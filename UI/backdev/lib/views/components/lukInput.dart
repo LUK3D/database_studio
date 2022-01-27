@@ -22,7 +22,11 @@ class lukInput extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: TextField(
         onChanged: (val) {
-          onChange(val);
+          try {
+            onChange(val);
+          } catch (e) {
+            print("ERRO em Luk3kInput no metodo de retorno!! ${e}");
+          }
         },
         decoration: InputDecoration(
             icon: icon, border: InputBorder.none, hintText: hint),

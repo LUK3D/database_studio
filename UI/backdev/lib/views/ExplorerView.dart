@@ -54,7 +54,7 @@ class ExplorerView extends StatelessWidget with TabPageMixin {
                                   .primaryColor
                                   .withOpacity(0.5),
                               icon: HeroIcon(
-                                HeroIcons.database,
+                                HeroIcons.folder,
                                 color: Colors.grey[600],
                                 size: 25,
                               ),

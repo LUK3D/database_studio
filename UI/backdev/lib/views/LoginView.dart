@@ -2,6 +2,7 @@ import 'package:backdev/controllers/LoginController.dart';
 import 'package:backdev/views/components/lukInput.dart';
 import 'package:backdev/views/editorView.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:select_dialog/select_dialog.dart';
@@ -33,6 +34,131 @@ class LoginView extends StatelessWidget {
                   Text(
                     "INICIAR CONEXÃO",
                     style: TextStyle(color: Colors.grey[600], fontSize: 40),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Obx(
+                          () => Material(
+                            color: (_controller.engine.value == "mysql")
+                                ? Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.3)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            child: InkWell(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              onTap: () {
+                                _controller.engine.value = "mysql";
+                              },
+                              child: SvgPicture.asset(
+                                "assets/mysql.svg",
+                                width: 70,
+                                height: 70,
+                                semanticsLabel: 'mysql',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Obx(
+                          () => Material(
+                            color: (_controller.engine.value == "mssql")
+                                ? Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.3)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            child: InkWell(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              onTap: () {
+                                _controller.engine.value = "mssql";
+                              },
+                              child: SvgPicture.asset(
+                                "assets/mssql.svg",
+                                width: 70,
+                                height: 70,
+                                semanticsLabel: 'mssql',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Obx(
+                          () => Material(
+                            color: (_controller.engine.value == "mongodb")
+                                ? Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.3)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            child: InkWell(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              onTap: () {
+                                _controller.engine.value = "mongodb";
+                              },
+                              child: SvgPicture.asset(
+                                "assets/mongodb.svg",
+                                width: 70,
+                                height: 70,
+                                semanticsLabel: 'mongodb',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Obx(
+                          () => Material(
+                            color: (_controller.engine.value == "sqlite")
+                                ? Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.3)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            child: InkWell(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              onTap: () {
+                                _controller.engine.value = "sqlite";
+                              },
+                              child: SvgPicture.asset(
+                                "assets/sqlite.svg",
+                                width: 70,
+                                height: 70,
+                                semanticsLabel: 'sqlite',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      HeroIcon(HeroIcons.database, color: Colors.grey[500]),
+                      Obx(
+                        () => Text(
+                          "Database Engine: ${_controller.engine.value}",
+                          style: TextStyle(color: Colors.grey[500]),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 20,

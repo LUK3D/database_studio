@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:backdev/views/CodeEditorView.dart';
 import 'package:backdev/views/ExplorerView.dart';
 import 'package:backdev/views/ToolsView.dart';
+import 'package:backdev/views/WorkAreaView.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:backdev/tab_panel/tabpanel.dart';
@@ -17,10 +18,7 @@ class EditorController extends GetxController {
   final leftPanel = TabPanel(defaultPage: ExplorerView());
   final rightPanel = TabPanel(defaultPage: ToolsView());
   final bottomPanel = TabPanel(defaultPage: CodeEditorView());
-  final midlePanel = TabPanel(
-      defaultPage: Container(
-    color: Colors.grey[200],
-  ));
+  final midlePanel = TabPanel(defaultPage: WorkAreaView());
 
   void onInput(String input) {
     print('input: $input');

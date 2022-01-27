@@ -17,11 +17,13 @@ class REQUESTS {
       {required server,
       database,
       required Function(List<DatabaseModel>) callback,
+      engine,
       user,
       password}) {
     Dio().post(baseUrl + databases, data: {
       "server": server,
       "database": database,
+      "engine": engine,
       "user": user,
       "password": password
     }).then((value) {
