@@ -66,72 +66,75 @@ class FlowCard extends StatelessWidget {
     final controller =
         Get.put(FlowCardController(parentId: parentId), tag: tag);
 
-    return Positioned(
-      key: controller.myid,
-      top: y,
-      right: x,
-      child: Material(
-        child: Container(
-          width: width,
-          height: height,
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 3),
-                    child: GestureDetector(
-                      onTap: () {
-                        controller.showMetrics();
-                      },
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          icon,
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Expanded(
-                            child: Container(
-                              child: Text(
-                                title,
-                                style: TextStyle(
-                                    fontSize: fontSize,
-                                    fontWeight: FontWeight.w700),
-                                softWrap: true,
+    return Draggable(
+      feedback: this,
+      child: Positioned(
+        key: controller.myid,
+        top: y,
+        right: x,
+        child: Material(
+          child: Container(
+            width: width,
+            height: height,
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 3),
+                      child: GestureDetector(
+                        onTap: () {
+                          controller.showMetrics();
+                        },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            icon,
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: Container(
+                                child: Text(
+                                  title,
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.w700),
+                                  softWrap: true,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  Divider(
-                    height: 2,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      "Just drop here your front-end framework from tools panel.",
-                      style:
-                          TextStyle(fontSize: 7, height: 1, color: Colors.grey),
+                    Divider(
+                      height: 2,
                     ),
-                  ),
-                ],
-              ),
-              FlowPath(
-                flow: flow,
-              ),
-            ],
-            clipBehavior: Clip.none,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        "Just drop here your front-end framework from tools panel.",
+                        style: TextStyle(
+                            fontSize: 7, height: 1, color: Colors.grey),
+                      ),
+                    ),
+                  ],
+                ),
+                FlowPath(
+                  flow: flow,
+                ),
+              ],
+              clipBehavior: Clip.none,
+            ),
           ),
+          elevation: 4,
+          borderRadius: BorderRadius.all(
+            Radius.circular(5),
+          ),
+          clipBehavior: Clip.none,
         ),
-        elevation: 4,
-        borderRadius: BorderRadius.all(
-          Radius.circular(5),
-        ),
-        clipBehavior: Clip.none,
       ),
     );
   }

@@ -8,8 +8,8 @@ class FlowCardController extends GetxController {
 
   final GlobalKey myid = GlobalKey();
 
-  FlowCardController({GlobalKey? this.parentId}) {
-    this.parentId = parentId;
+  FlowCardController({GlobalKey? parentId}) {
+    parentId = parentId;
   }
 
   void showMetrics() {
@@ -28,7 +28,7 @@ class FlowCardController extends GetxController {
 
 class Metrics {
   Size size = Size(0, 0);
-  Rect globRect = Rect.fromLTRB(0, 0, 0, 0)
+  Rect globRect = Rect.fromLTRB(0, 0, 0, 0);
   var relativeRect;
   var left;
   var right;
@@ -40,12 +40,12 @@ class Metrics {
     BuildContext ctx = key.currentContext!;
     size = ctx.size!;
     globRect = key.globalPaintBounds!;
-    relativeRect = relativeRect;
-    left = left;
-    right = right;
-    top = top;
-    bottom = bottom;
-    wCenter = wCenter;
-    hCenter = hCenter;
+    relativeRect = ctx.findRenderObject()!.paintBounds;
+    left = ctx.findRenderObject()!.paintBounds.left;
+    right = ctx.findRenderObject()!.paintBounds.right;
+    top = ctx.findRenderObject()!.paintBounds.top;
+    bottom = ctx.findRenderObject()!.paintBounds.bottom;
+    wCenter = ctx.findRenderObject()!.paintBounds.width / 2;
+    hCenter = ctx.findRenderObject()!.paintBounds.height / 2;
   }
 }
