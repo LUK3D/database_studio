@@ -177,7 +177,9 @@ class LoginView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: lukInput(
-                          onChange: () {},
+                          onChange: (val) {
+                            _controller.user.value = val;
+                          },
                           hint: "Username",
                           icon: HeroIcon(HeroIcons.userCircle),
                         ),
@@ -187,7 +189,9 @@ class LoginView extends StatelessWidget {
                       ),
                       Expanded(
                         child: lukInput(
-                          onChange: () {},
+                          onChange: (val) {
+                            _controller.password.value = val;
+                          },
                           hint: "Password",
                           icon: HeroIcon(HeroIcons.lockClosed),
                         ),

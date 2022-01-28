@@ -1,7 +1,7 @@
 {
     "mysql":{
         "lisdb":"SHOW DATABASES;",
-        "listtables":"SHOW TABLES;",
+        "listtables":"SHOW TABLES FROM ${database}",
         "listcolumns":"SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '${table}' ORDER BY ORDINAL_POSITION",
         "liststoredprocedures":"SHOW PROCEDURE STATUS WHERE Db  = '${database}'; ",
         "storedproceduresscripts":"USE MASI_TESTES SELECT  OBJECT_DEFINITION (OBJECT_ID(N'${storedProcedure}') ) As SCRIPT;",

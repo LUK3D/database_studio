@@ -12,12 +12,16 @@ function listDB({server, user, password,database, callback, engine = "mysql"  })
     }})
 }
 function listTables({server, user, password,database, callback, engine = "mysql" }){
+
+
+    console.log("MY DATABASE",database);
+
     executeQuery({server:server,user:user,password:password, engine:engine,  database:database, 
         query:((engine == "mysql")?
         utils.replace(sqlCommands.mysql.listtables,"${database}",database) 
         :utils.replace(sqlCommands.sqlServer.listtables,"${database}",database)), 
-        onSuccess:(val)=>{
-        callback && callback((val?(val.recordset)?val.recordset:val:null));
+        onSuccess:(val,val2)=>{
+        callback && callback((val?val:null));
     }, onError:(val)=>{
         callback && callback(val);
     }})
@@ -30,7 +34,7 @@ function listColumns({server, user, password, database,table, callback, engine =
         :utils.replace(sqlCommands.sqlServer.listcolumns,"${table}",table)),
         
         onSuccess:(val)=>{
-        callback && callback((val?(val.recordset)?val.recordset:val:null));
+        callback && callback((val?((val.ColumnDefinition)?val.ColumnDefinition:val):null));
     }, onError:(val)=>{
         callback && callback(val);
     }})
@@ -101,10 +105,10 @@ function relations({server, user, password,database, callback, engine = "mysql" 
                  console.log("Engine 1:",engine);
 
                 const connection = mysql.createConnection({
-                    host: server||'localhost' +(server?port||"":""),
-                    user: user||"root",
-                    password:password||"",
-                    database: database||'information_schema'
+                    host: utils.onEmpty(server,'localhost') +(utils.onEmpty((":"+(port||"")),"",3)),
+                    user: utils.onEmpty(user,'root'),
+                    password:utils.onEmpty(password,''),
+                    database: utils.onEmpty(database,'information_schema'),
                   });
 
                   // simple query

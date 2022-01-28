@@ -18,8 +18,10 @@ app.post('/databases', (req, res) => {
 })
 
 app.get('/tables', (req, res) => {
-    db.listTables({...req.body,callback:(resp)=>{
-        res.send(resp)
+    var data = {...req.query};
+    db.listTables({...data,callback:(resp)=>{
+        console.log("FIM", resp)
+        res.send((resp||[]).map(x=>h.renameObject(x,"name")))
     }})
 })
 app.get('/columns', (req, res) => {

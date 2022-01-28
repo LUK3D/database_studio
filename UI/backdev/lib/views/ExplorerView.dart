@@ -31,37 +31,120 @@ class ExplorerView extends StatelessWidget with TabPageMixin {
           child: Container(
             child: _controller.databases.value.isNotEmpty
                 ? TreeView(
-                    startExpanded: false,
+                    startExpanded: true,
                     children: _controller.databases.map((db) {
                       return Container(
-                        child: Row(
+                        child: Column(
                           children: [
-                            Transform.scale(
-                                scale: 0.7,
-                                child: Obx(
-                                  () => Checkbox(
-                                      value:
-                                          _controller.selectedDatabase.value ==
+                            Row(
+                              children: [
+                                Transform.scale(
+                                    scale: 0.7,
+                                    child: Obx(
+                                      () => Checkbox(
+                                          value: _controller
+                                                  .selectedDatabase.value ==
                                               db,
-                                      onChanged: (val) {
-                                        _controller.selectedDatabase.value = db;
-                                      }),
-                                )),
-                            IconButton(
-                              onPressed: () {},
-                              splashRadius: 20,
-                              splashColor: Theme.of(context)
-                                  .primaryColor
-                                  .withOpacity(0.5),
-                              icon: HeroIcon(
-                                HeroIcons.folder,
-                                color: Colors.grey[600],
-                                size: 25,
-                              ),
+                                          onChanged: (val) {
+                                            _controller.selectedDatabase.value =
+                                                db;
+                                            _controller.getChilds(
+                                                database: db.name);
+                                          }),
+                                    )),
+                                IconButton(
+                                  onPressed: () {},
+                                  splashRadius: 20,
+                                  splashColor: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.5),
+                                  icon: HeroIcon(
+                                    HeroIcons.database,
+                                    color: Colors.grey[600],
+                                    size: 25,
+                                  ),
+                                ),
+                                Text(
+                                  db.name,
+                                  style: TextStyle(color: Colors.grey[700]),
+                                )
+                              ],
                             ),
-                            Text(
-                              db.name,
-                              style: TextStyle(color: Colors.grey[700]),
+                            Obx(
+                              () => Visibility(
+                                visible:
+                                    (_controller.selectedDatabase.value == db),
+                                child: Container(
+                                  color: Colors.grey[100],
+                                  height: 43.0 * _controller.tables.length,
+                                  padding: EdgeInsets.only(left: 20, right: 6),
+                                  child: Row(
+                                    children: [
+                                      VerticalDivider(),
+                                      Expanded(
+                                        child: Container(
+                                          child: TreeView(
+                                            startExpanded: true,
+                                            children: _controller.tables
+                                                .map((db_table) {
+                                              return Container(
+                                                child: Column(
+                                                  children: [
+                                                    Divider(
+                                                      height: 2,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Transform.scale(
+                                                            scale: 0.7,
+                                                            child: Obx(
+                                                              () => Checkbox(
+                                                                  value: _controller
+                                                                          .selectedDatabase
+                                                                          .value ==
+                                                                      db,
+                                                                  onChanged:
+                                                                      (val) {
+                                                                    _controller
+                                                                            .selectedTable
+                                                                            .value =
+                                                                        db_table
+                                                                            .name;
+                                                                  }),
+                                                            )),
+                                                        IconButton(
+                                                          onPressed: () {},
+                                                          splashRadius: 20,
+                                                          splashColor: Theme.of(
+                                                                  context)
+                                                              .primaryColor
+                                                              .withOpacity(0.5),
+                                                          icon: Icon(
+                                                            Icons.grid_on_sharp,
+                                                            color: Colors
+                                                                .grey[600],
+                                                            size: 25,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          db_table.name,
+                                                          style: TextStyle(
+                                                              color: Colors
+                                                                  .grey[700]),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             )
                           ],
                         ),

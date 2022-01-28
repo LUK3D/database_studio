@@ -21,4 +21,30 @@ function dbFromObject(db){
 
 }
 
-module.exports = {replace,dbFromObject};
+function renameObject(object,newname){
+ return   Object.fromEntries(
+        Object.entries(object).map(([key, value]) => 
+          // Modify key here
+          [newname, value]
+        )
+      )
+}
+
+function emptyOrNull(val, lengthCheck = 0){
+
+    if(val ==null || val == undefined)
+    return true;
+    if(typeof(val) == "string"){
+        if(val.trim().length<lengthCheck){
+            return true;
+        }
+    }
+
+    return false;
+
+}
+function onEmpty(value, holder,lengthCheck = 0){
+   return this.emptyOrNull(value,lengthCheck)?holder||"":value;
+}
+
+module.exports = {replace,dbFromObject, renameObject,emptyOrNull,onEmpty };

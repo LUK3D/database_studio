@@ -13,11 +13,11 @@ class EditorView extends StatelessWidget {
     return Column(
       children: [
         Container(
-          color: Colors.blue,
+          color: Colors.white,
           height: 50,
         ),
         Divider(
-          height: 2,
+          height: 1.25,
           color: Colors.grey[100],
         ),
         Expanded(

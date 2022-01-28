@@ -256,6 +256,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1+1"
+  render_metrics:
+    dependency: "direct main"
+    description:
+      name: render_metrics
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   select_dialog:
     dependency: "direct main"
     description:

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="62" height="62" viewBox="0 0 62 62">
+  <defs>
+    <filter id="Rectangle_1" x="0" y="0" width="62" height="62" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="6.5" result="blur"/>
+      <feFlood flood-color="#3b59ac" flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="0.512" gradientTransform="translate(-0.095 0.118) rotate(-12.345)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="0.757" stop-color="#eee"/>
+      <stop offset="1" stop-color="#839fe1"/>
+    </radialGradient>
+  </defs>
+  <g id="Dot" transform="translate(-1278 -165)">
+    <g transform="matrix(1, 0, 0, 1, 1278, 165)" filter="url(#Rectangle_1)">
+      <rect id="Rectangle_1-2" data-name="Rectangle 1" width="20" height="20" rx="10" transform="translate(21 21)" fill="#395feb" stroke="#fff" stroke-width="3"/>
+    </g>
+    <rect id="Rectangle_2" data-name="Rectangle 2" width="10" height="10" rx="5" transform="translate(1304 191)" fill="url(#radial-gradient)"/>
+  </g>
+</svg>
