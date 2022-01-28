@@ -54,9 +54,13 @@ class WorkAreaView extends StatelessWidget {
                           width: double.infinity,
                           height: double.infinity,
                           child: DragTarget<Widget>(
-                            onAccept: ((details) => {}),
+                            onAccept: ((details) {}),
+                            onWillAccept: ((detalhes) {
+                              return true;
+                            }),
+                            onAcceptWithDetails: (val) {},
                             builder: (ctx, list, list2) {
-                              return this;
+                              return Container();
                             },
                           ),
                         ),
