@@ -124,9 +124,10 @@ function relations({server, user, password,database, callback, engine = "mysql" 
 
             }else{
                 console.log("Engine:",engine);
-                await sql.connect(`Data Source=${server};Initial Catalog=${database||'DWDiagnostics'};Integrated Security=False;Uid=${user||'sa'};password=${password||'abc@123'};Connect Timeout=1800;;Trusted_Connection=True;TrustServerCertificate=True;`)
-                const result = await sql.query(query)
-                onSuccess && onSuccess(result);
+                var w = await sql.connect(`Data Source=${server};Initial Catalog=${database||'DWDiagnostics'};Integrated Security=False;Uid=${user||'sa'};password=${password||'abc@123'};Connect Timeout=1800;;Trusted_Connection=True;TrustServerCertificate=True;`)
+                var res = await (await sql.query(query))
+                onSuccess && onSuccess(res.recordset||res);
+                w.close();
             }
 
            
