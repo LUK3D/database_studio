@@ -49,9 +49,17 @@ class WorkAreaView extends StatelessWidget {
                   height: double.infinity,
                   child: Center(
                     child: Stack(
-                      alignment: Alignment.center,
-                      clipBehavior: Clip.none,
                       children: [
+                        Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: DragTarget<Widget>(
+                            onAccept: ((details) => {}),
+                            builder: (ctx, list, list2) {
+                              return this;
+                            },
+                          ),
+                        ),
                         FlowCard(
                           width: 200,
                           height: 100,

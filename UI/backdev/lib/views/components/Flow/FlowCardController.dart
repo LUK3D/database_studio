@@ -5,25 +5,16 @@ import 'package:get/get.dart';
 class FlowCardController extends GetxController {
   var parentId;
   var size = Size(0, 0).obs;
-
-  Rx<Metrics>? metrics;
-
   var x = 0.0.obs;
   var y = 0.0.obs;
 
   final GlobalKey myid = GlobalKey();
 
-  FlowCardController(
-      {GlobalKey? parentId, this.metrics, double? x = 0, double? y = 0}) {
+  FlowCardController({GlobalKey? parentId}) {
     parentId = parentId;
   }
 
-  void showMetrics(x, y) {
-    this.metrics = new Metrics(myid).obs;
-
-    this.metrics!.value.right = x;
-    this.metrics!.value.top = y;
-
+  void showMetrics() {
     size.value = Size(
         myid.currentContext!.size!.width, myid.currentContext!.size!.height);
 
@@ -48,7 +39,7 @@ class Metrics {
   var wCenter;
   var hCenter;
   Metrics(GlobalKey key) {
-    BuildContext ctx = Get.context!;
+    BuildContext ctx = key.currentContext!;
     size = ctx.size!;
     globRect = key.globalPaintBounds!;
     relativeRect = ctx.findRenderObject()!.paintBounds;

@@ -64,85 +64,104 @@ class FlowCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var tag = Uuid().v4();
     final controller =
-        Get.put(FlowCardController(parentId: parentId, x: x, y: y), tag: tag);
+        Get.put(FlowCardController(parentId: parentId), tag: tag);
 
-    return Obx(
-      () => Positioned(
-        key: controller.myid,
-        top: (controller.metrics ?? y).value.top,
-        right: (controller.metrics ?? x).value.right,
-        child: Draggable(
-          feedback: this,
-          childWhenDragging: Container(),
-          onDragEnd: (drag) {
-            controller.metrics!.value = new Metrics(controller.myid);
-
-            controller.showMetrics(
-                controller.metrics!.value.right, controller.metrics!.value.top);
-          },
-          child: Material(
-            child: Container(
-              width: width,
-              height: height,
-              child: Stack(
+    return Draggable<Widget>(
+      feedback: Obx(
+        () => Container(
+          padding: EdgeInsets.only(
+              top: controller.y.value, left: controller.x.value),
+          child: this,
+        ),
+      ),
+      childWhenDragging: Obx(
+        () => Container(
+          padding: EdgeInsets.only(
+              top: controller.y.value, left: controller.x.value),
+          child: this,
+        ),
+      ),
+      onDragEnd: (drag) {
+        controller.y.value = controller.y.value + drag.offset.dy < 0
+            ? 0
+            : controller.y.value + drag.offset.dy;
+        controller.x.value = controller.x.value + drag.offset.dx < 0
+            ? 0
+            : controller.x.value + drag.offset.dx;
+      },
+      child: Material(
+        child: Container(
+          width: width,
+          height: height,
+          child: Stack(
+            children: [
+              Column(
                 children: [
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 3),
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              icon,
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Expanded(
-                                child: Container(
-                                  child: Text(
-                                    title,
-                                    style: TextStyle(
-                                        fontSize: fontSize,
-                                        fontWeight: FontWeight.w700),
-                                    softWrap: true,
-                                  ),
-                                ),
-                              ),
-                            ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 3),
+                    child: GestureDetector(
+                      onTap: () {
+                        // controller.showMetrics();
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          icon,
+                          SizedBox(
+                            width: 5,
                           ),
-                        ),
+                          Expanded(
+                            child: Container(
+                              child: Text(
+                                title,
+                                style: TextStyle(
+                                    fontSize: fontSize,
+                                    fontWeight: FontWeight.w700),
+                                softWrap: true,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      Divider(
-                        height: 2,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          "Just drop here your front-end framework from tools panel.",
-                          style: TextStyle(
-                              fontSize: 7, height: 1, color: Colors.grey),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                  FlowPath(
-                    flow: flow,
+                  Divider(
+                    height: 2,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      "Just drop here your front-end framework from tools panel.",
+                      style:
+                          TextStyle(fontSize: 7, height: 1, color: Colors.grey),
+                    ),
                   ),
                 ],
-                clipBehavior: Clip.none,
               ),
-            ),
-            elevation: 4,
-            borderRadius: BorderRadius.all(
-              Radius.circular(5),
-            ),
+              FlowPath(
+                flow: flow,
+              ),
+            ],
             clipBehavior: Clip.none,
           ),
         ),
+        elevation: 4,
+        borderRadius: BorderRadius.all(
+          Radius.circular(5),
+        ),
+        clipBehavior: Clip.none,
       ),
+    );
+  }
+}
+
+class DragItem extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      IconData(57744, fontFamily: 'MaterialIcons'),
+      size: 36,
     );
   }
 }
