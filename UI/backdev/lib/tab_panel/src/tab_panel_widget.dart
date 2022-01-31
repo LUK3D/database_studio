@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide Tab;
 import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import './tab_panel_theme.dart';
+import 'package:backdev/tab_panel/src/tab_panel_theme.dart';
 import 'context_menu.dart';
 import 'tab_panel.dart';
 
@@ -258,7 +258,6 @@ class EmptyPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        height: 30,
         child: FittedBox(
           fit: BoxFit.contain,
           child: InkWell(

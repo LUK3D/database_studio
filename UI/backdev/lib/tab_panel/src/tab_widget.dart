@@ -1,7 +1,6 @@
 import 'context_menu.dart';
 import 'tab_panel.dart';
 import 'package:flutter/material.dart' hide Tab;
-import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'tab.dart';
@@ -22,11 +21,8 @@ class TabWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final lastPage = tab.pages.isNotEmpty ? tab.pages.last : null;
 
-    final defaultIcon = Icon(
-      Icons.tab,
-      color: Theme.of(context).colorScheme.onSurface,
-      size: 20,
-    );
+    final defaultIcon =
+        Icon(Icons.tab, color: Theme.of(context).colorScheme.onSurface);
     Widget icon;
     String title;
     if (lastPage is TabPageMixin) {
@@ -54,7 +50,7 @@ class TabWidget extends StatelessWidget {
             ),
           )),
       child: ConstrainedBox(
-        constraints: BoxConstraints(minHeight: 10),
+        constraints: BoxConstraints(minHeight: 40),
         child: Observer(builder: (context) {
           return Row(
             children: [
@@ -86,11 +82,7 @@ class TabWidget extends StatelessWidget {
               SizedBox(width: 8),
               if (!tab.locked)
                 IconButton(
-                  icon: Icon(
-                    Icons.close,
-                    size: 15,
-                  ),
-                  splashRadius: 15,
+                  icon: Icon(Icons.close),
                   onPressed:
                       !tab.locked ? () => tab.panel.closeTab(tab.id) : null,
                   color: Theme.of(context).colorScheme.onSurface,

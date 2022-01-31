@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 final _defaultTabPanelTheme = const TabPanelThemeData();
 
@@ -16,9 +15,8 @@ class TabPanelThemeData with Diagnosticable {
   /// Creates a theme that can be used for [TabPanelTheme] or
   /// [ThemeData.bannerTheme].
   const TabPanelThemeData({
-    this.dividerColor = Colors.black12,
+    this.dividerColor = Colors.black38,
     this.dividerWidth = 2.0,
-    this.headerHeight = 40,
   });
 
   /// The color of the divider which acts as a drag handle to resize the panel.
@@ -27,19 +25,15 @@ class TabPanelThemeData with Diagnosticable {
   /// The color of the divider which acts as a drag handle to resize the panel.
   final double dividerWidth;
 
-  final double headerHeight;
-
   /// Creates a copy of this object with the given fields replaced with the
   /// new values.
   TabPanelThemeData copyWith({
     Color? dividerColor,
     double? dividerWidth,
-    double? headerHeight,
   }) {
     return TabPanelThemeData(
       dividerColor: dividerColor ?? this.dividerColor,
       dividerWidth: dividerWidth ?? this.dividerWidth,
-      headerHeight: headerHeight ?? this.headerHeight,
     );
   }
 

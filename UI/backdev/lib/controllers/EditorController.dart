@@ -15,10 +15,11 @@ class EditorController extends GetxController {
   var darkMode = false.obs;
   var childSizes = 200.0.obs;
 
-  final leftPanel = TabPanel(defaultPage: ExplorerView());
-  final rightPanel = TabPanel(defaultPage: ToolsView());
-  final bottomPanel = TabPanel(defaultPage: CodeEditorView());
-  final midlePanel = TabPanel(defaultPage: WorkAreaView());
+  final leftPanel = TabPanel(defaultPage: ExplorerView(), flex: 1);
+  final rightPanel = TabPanel(defaultPage: ToolsView(), flex: 1);
+  final bottomPanel = TabPanel(defaultPage: CodeEditorView(), flex: 1);
+  final midlePanel =
+      TabPanel(defaultPage: WorkAreaView(), flex: 3, axis: Axis.vertical);
 
   void onInput(String input) {
     print('input: $input');
@@ -42,7 +43,8 @@ class EditorController extends GetxController {
     var tmpPanel = TabPanel(
         defaultPage: Container(),
         panels: [midlePanel, bottomPanel],
-        axis: Axis.vertical);
+        axis: Axis.vertical,
+        flex: 3);
 
     bottomPanel.pushPage(page: AddTerminal(), forceNewTab: true);
 
